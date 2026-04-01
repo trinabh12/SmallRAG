@@ -15,4 +15,6 @@ class Ingestion:
 
         #self.images = [page.get_images() for page in self.pdf]
 
-    def
+    def extract_text(self):
+        texts = self.text
+        
