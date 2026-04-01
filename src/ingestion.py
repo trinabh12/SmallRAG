@@ -1,6 +1,7 @@
 from pdfminer.high_level import extract_text
 import tabula
 import fitz
+import os
 import PIL.Image
 
 class Ingestion:
@@ -15,6 +16,12 @@ class Ingestion:
 
         #self.images = [page.get_images() for page in self.pdf]
 
+        self.extracted_info = {}
+
     def extract_text(self):
         texts = self.text
-        
+
+    def extract_tables(self):
+        tables = self.tables
+    
+
