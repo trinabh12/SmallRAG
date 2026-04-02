@@ -34,7 +34,11 @@ class Ingestion:
         return text_data_path
 
     def process_tables(self):
-        tables = self.tables
+        df_dictionary = {}
+
+        tabular_data = {'tabular_data': df_dictionary}
+        with open(f'data/{self.doc_name}/tables/tabular-data.json', 'w', encoding='utf-8') as f:
+            json.dump(tabular_data, f, indent=4)
 
 
         tabular_data_path = f"data/{self.doc_name}/tables"
