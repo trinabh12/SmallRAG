@@ -35,6 +35,10 @@ class Ingestion:
 
     def process_tables(self):
         df_dictionary = {}
+        counter = 1
+        for table in self.tables:
+            df_dictionary.update({f"table{counter}": f"{table.to_dict}"})
+            counter+=1
 
         tabular_data = {'tabular_data': df_dictionary}
         with open(f'data/{self.doc_name}/tables/tabular-data.json', 'w', encoding='utf-8') as f:
