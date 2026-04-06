@@ -17,7 +17,7 @@ class Ingestion:
         os.makedirs(f"data/{self.doc_name}", exist_ok=True)
 
         self.extracted_info = {
-            "location": {"file_name": os.path.basename(doc_path)},
+            "location": {"file_name": self.doc_name},
             "text": "",
             "tables": "",
             "images_paths": ""
@@ -65,9 +65,17 @@ class Ingestion:
         return image_data_path
 
     def extract_and_store(self):
+        self.extracted_info.update({
+                "location": {"file_name": self.doc_name},
+                "text": self.process_text(),
+                "tables": self.process_tables(),
+                "images_paths": self.process_images()
 
+        })
 
+        manifest_path = f"data/metadata_manifest.json"
+        with open(manifest_path, "w", encoding="utf-8") as f:
+            json.dump(self.extracted_info, f, indent=4)
 
-
-
-
+        print(f"Ingestion complete. Manifest saved at {manifest_path}")
+        return manifest_path
