@@ -8,7 +8,12 @@ import os
 
 class Ingestion:
     def __init__(self, doc_path):
-        self.doc_name = os.path.basename(doc_path)
+        self.doc_name = os.path.basename(doc_path).split(".")[0]
+        os.makedirs(f"data/{self.doc_name}", exist_ok=True)
+        os.makedirs(f"data/{self.doc_name}/text", exist_ok=True)
+        os.makedirs(f"data/{self.doc_name}/tables", exist_ok=True)
+        os.makedirs(f"data/{self.doc_name}/images", exist_ok=True)
+
         self.doc =  fitz.open(doc_path)
         self.text = extract_text(doc_path)
         self.tables = tabula.read_pdf(doc_path, pages='all', encoding='latin-1')
@@ -61,7 +66,7 @@ class Ingestion:
             img.save(open(f"data/{self.doc_name}/images/image{counter}.{extension}", "wb"))
             counter+=1
 
-        image_data_path = f"data/{self.doc_name/images}"
+        image_data_path = f"data/{self.doc_name}/images"
         return image_data_path
 
     def extract_and_store(self):
