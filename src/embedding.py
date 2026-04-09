@@ -25,5 +25,10 @@ class Embedder:
         )
 
 
+        self.model = SentenceTransformer(embedding_models_dir, trust_remote_code=True)
+
+        def text_chunking(self, chunk_size=1000, overlap=150):
+            
+
 
 
