@@ -3,11 +3,9 @@ from sentence_transformers import SentenceTransformer
 import os
 import json
 
-MODEL_DIR = os.path.join("../", "models", "embedding models")
+MODEL_DIR = os.path.join("../", "models")
 
-class Ingestion:
-    def __init__(self, doc_name):
-        self.doc_name = doc_name
+
 class Embedder:
     def __init__(self, text, tables, images):
         with open(text, "r", encoding='utf-8') as file:
@@ -16,10 +14,15 @@ class Embedder:
             self.tables = json.load(file)
         self.images = images
 
-        model_name = ""
-        local_dir = os.path.join(MODEL_DIR, "all-MiniLM-L6-v2")
 
-    def text_chunking(self):
+        embedding_models_dir = os.path.join(MODEL_DIR, "embedding_models")
+        if not os.path.exists(embedding_models_dir):
+            os.makedirs(embedding_models_dir, exist_ok=True)
+
+        snapshot_download(
+            repo_id="nomic-ai/nomic-embed-text-v1.5",
+            local_dir=embedding_models_dir
+        )
 
 
 
