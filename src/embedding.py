@@ -27,7 +27,25 @@ class Embedder:
 
         self.model = SentenceTransformer(embedding_models_dir, trust_remote_code=True)
 
-        def text_chunking(self, chunk_size=1000, overlap=150):
+    def download_model(self):
+        if not os.path.exists(self.model):
+            print(f"Downloading {self.model_name} to {self.local_model_path}")
+
+    def text_chunking(self, chunk_size=1000, overlap=150):
+
+        chunks = []
+        start = 0
+        text_len = len(self.text)
+
+        while start < text_len:
+            end = start + chunk_size
+            chunk = self.text[start:end]
+            chunks.append(chunk)
+
+            start+=(chunk_size - overlap)
+
+            return chunks
+
 
 
 
