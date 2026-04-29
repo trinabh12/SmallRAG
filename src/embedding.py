@@ -2,6 +2,7 @@ from huggingface_hub import snapshot_download
 from sentence_transformers import SentenceTransformer
 import os
 import json
+import numpy as np
 
 MODEL_DIR = os.path.join("../", "models")
 
@@ -61,7 +62,15 @@ class Embedder:
         return embeddings
 
     def save_to_disk(self, vectors, chunks, db_path="nano_db"):
-        os.make
+        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+
+        np.save(os.path.join(db_path, "vectors.npy"), vectors)
+
+        with open(os.path.join(db_path, "chunks.json"), "w", encoding='utf-8') as f:
+            json.dump({"chunks": chunks}, f, indent=4)
+
+        print(f"Persistence complete in {db_path}")
+
 
 
 
