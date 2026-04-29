@@ -47,6 +47,23 @@ class Embedder:
             return chunks
 
 
+    def generate_embeddings(self, chunks):
+        prefixed_chunks = [f"search_document: {chunk}" for chunk in chunks]
+
+        print(f"Generating embeddings for {len(chunks)} chunks...")
+
+        embeddings = self.model.encode(
+            prefixed_chunks,
+            convert_to_numpy=True,
+            show_progress_bar=True
+        )
+
+        return embeddings
+
+    def save_to_disk(self, vectors, chunks, db_path="nano_db"):
+        os.make
+
+
 
 
 
