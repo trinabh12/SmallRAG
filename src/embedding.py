@@ -70,6 +70,7 @@ class Embedder:
             json.dump({"chunks": chunks}, f, indent=4)
 
         print(f"Persistence complete in {db_path}")
+        
 
 
 
