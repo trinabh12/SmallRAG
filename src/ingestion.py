@@ -78,7 +78,7 @@ class Ingestion:
 
         })
 
-        manifest_path = f"data/metadata_manifest.json"
+        manifest_path = f"data/{self.doc_name}_metadata_manifest.json"
         with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(self.extracted_info, f, indent=4)
 
