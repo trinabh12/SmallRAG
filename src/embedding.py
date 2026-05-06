@@ -110,7 +110,7 @@ class Embedder:
         self.save(embeddings, all_chunks, types)
 
     def save(self, embeddings, chunks, types):
-        save_dir = os.path.join("vector_db", self.doc_name)
+        save_dir = os.path.join("../db", self.doc_name)
         os.makedirs(save_dir, exist_ok=True)
 
         np.save(os.path.join(save_dir, "vectors.npy"), embeddings)
