@@ -4,7 +4,7 @@ import os
 import json
 import numpy as np
 
-MODEL_DIR = os.path.join("models", "embedding_models")
+MODEL_DIR = os.path.join("../models", "embedding_models")
 
 
 class Embedder:
