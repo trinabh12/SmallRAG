@@ -41,11 +41,9 @@ class VectorDatabase:
 
         self.index.add(self.vectors)
 
-        print(f"✅ Loaded {len(self.vectors)} vectors into FAISS.")
+        print(f"Loaded {len(self.vectors)} vectors into FAISS.")
 
-    # -----------------------------------
-    # QUERY EMBEDDING
-    # -----------------------------------
+
     def embed_query(self, query):
         query_embedding = self.model.encode(
             [f"search_query: {query}"],
@@ -54,9 +52,7 @@ class VectorDatabase:
 
         return query_embedding.astype("float32")
 
-    # -----------------------------------
-    # SEARCH
-    # -----------------------------------
+
     def search(self, query, top_k=5):
         query_vector = self.embed_query(query)
 
@@ -81,7 +77,7 @@ class VectorDatabase:
 
 
     def pretty_print(self, results):
-        print("\n🔍 Search Results:\n")
+        print("\nSearch Results:\n")
 
         for result in results:
             print("=" * 60)
