@@ -4,7 +4,6 @@ from llama_cpp import Llama
 
 class SmallLLM:
     def __init__(self):
-        # Pathing consistent with your SmallRAG structure
         self.model_path = os.path.join("models", "Dolphin3.0-Llama3.1-8B-Q8_0.gguf")
 
         if not os.path.exists(self.model_path):
@@ -12,9 +11,7 @@ class SmallLLM:
 
         print(f"SmallRAG: Loading {os.path.basename(self.model_path)} into RAM...")
 
-        # Initialize the model
-        # n_ctx: Context window (Llama 3.1 supports up to 128k, but 4096 is great for local RAG)
-        # n_threads: Number of CPU cores to use
+
         self.llm = Llama(
             model_path=self.model_path,
             n_ctx=4096,
@@ -23,7 +20,6 @@ class SmallLLM:
         )
 
     def generate_response(self, prompt, max_tokens=512, stop=["Q:", "\n", "User:"]):
-        """Basic completion logic from your notebook."""
         output = self.llm(
             prompt,
             max_tokens=max_tokens,
@@ -33,11 +29,6 @@ class SmallLLM:
         return output["choices"][0]["text"].strip()
 
     def generate_rag_answer(self, query, context):
-        """
-        Specialized RAG function.
-        Injects the retrieved context into a system prompt.
-        """
-        # Industrial Prompt Template for Dolphin/Llama
         system_prompt = (
             "You are SmallRAG, a helpful AI assistant. Use the following pieces of "
             "retrieved context to answer the user's question. If you don't know the "
