@@ -30,7 +30,7 @@ class SmallLLM:
 
     def generate_rag_answer(self, query, context):
         system_prompt = (
-            "You are SmallRAG, a helpful AI assistant. Use the following pieces of "
+            "You are a helpful AI assistant. Use the following pieces of "
             "retrieved context to answer the user's question. If you don't know the "
             "answer based on the context, say that you don't know. Keep it concise.\n\n"
             f"Context: {context}"
